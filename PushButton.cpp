@@ -31,18 +31,18 @@ void PushButton::loop() {
   }
 }
 
-char* PushButton::buttonPressTypeToString(ButtonPressType msg) {
-  switch(msg) {
-    case ButtonPressType::firstPress:
+char* PushButton::eventToString(ButtonEvent event) {
+  switch(event) {
+    case ButtonEvent::firstPress:
       return "firstPress";
       break;
-    case ButtonPressType::repeatedPress:
+    case ButtonEvent::repeatedPress:
       return "repeatedPress";
       break;
-    case ButtonPressType::release:
+    case ButtonEvent::release:
       return "release";
       break;
-    case ButtonPressType::none:
+    case ButtonEvent::none:
       return "none";
       break;
     default:
@@ -53,31 +53,31 @@ char* PushButton::buttonPressTypeToString(ButtonPressType msg) {
 
 
 
-ButtonPressType PushButton::read() {
+ButtonEvent PushButton::read() {
   if ((millis() > this->nextEvalTime)) {
 
     if (!this->state) {
 
-      if (this->lastMessage == repeatedPress || this->lastMessage == firstPress) {
+      if (this->lastEvent == repeatedPress || this->lastEvent == firstPress) {
           this->nextEvalTime = millis() + PUSH_BUTTON_REPEAT_INTERVAL;
-          this->lastMessage = ButtonPressType::repeatedPress;
+          this->lastEvent = ButtonEvent::repeatedPress;
       } else {
           this->nextEvalTime = millis() + PUSH_BUTTON_TIME_TO_REPEAT;
-          this->lastMessage = ButtonPressType::firstPress;
+          this->lastEvent = ButtonEvent::firstPress;
       }
 
     } else {
 
-      if (this->lastMessage == repeatedPress || this->lastMessage == firstPress) {
-        this->lastMessage = ButtonPressType::release;
+      if (this->lastEvent == repeatedPress || this->lastEvent == firstPress) {
+        this->lastEvent = ButtonEvent::release;
       } else {
-        this->lastMessage = ButtonPressType::none;
+        this->lastEvent = ButtonEvent::none;
       }
 
     }
 
-    return this->lastMessage;
+    return this->lastEvent;
   }
 
-  return ButtonPressType::none;
+  return ButtonEvent::none;
 }

@@ -25,10 +25,10 @@ void loop() {
 
     char buffer[64];
 
-    int msg = buttons[buttonIndex].read();
+    ButtonEvent event = buttons[buttonIndex].read();
 
-    if (msg != ButtonPressType::none) {
-      sprintf(buffer, "button #%u %s",buttonIndex, PushButton::buttonPressTypeToString(msg));
+    if (event != ButtonEvent::none) {
+      sprintf(buffer, "button #%u %s",buttonIndex, PushButton::eventToString(event));
       Serial.println(buffer);
     }
 

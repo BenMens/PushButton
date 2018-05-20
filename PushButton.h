@@ -11,7 +11,7 @@ typedef enum {
   firstPress,
   repeatedPress,
   release
-} ButtonPressType;
+} ButtonEvent;
 
 class PushButton {
 
@@ -23,16 +23,16 @@ class PushButton {
     byte pin;
     bool state;
     unsigned long nextEvalTime;
-    ButtonPressType lastMessage;
+    ButtonEvent lastEvent;
 
   public:
 
     static void loop();
-    static char* buttonPressTypeToString(ButtonPressType msg);
+    static char* eventToString(ButtonEvent event);
 
     PushButton(byte pin);
 
-    ButtonPressType read();
+    ButtonEvent read();
 };
 
 #endif
