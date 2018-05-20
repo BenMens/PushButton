@@ -1,13 +1,15 @@
 #include <PushButton.h>
 
-#define BUTTON1_PIN 6
-#define BUTTON2_PIN 2
-#define BUTTON3_PIN 3
+#define BUTTON1_PIN 2
+#define BUTTON2_PIN 3
+#define BUTTON3_PIN 4
+#define BUTTON4_PIN 5
 
 PushButton buttons[] = {
   PushButton(BUTTON1_PIN),
   PushButton(BUTTON2_PIN),
-  PushButton(BUTTON3_PIN)
+  PushButton(BUTTON3_PIN),
+  PushButton(BUTTON4_PIN)
 };
 
 #define NUM_BUTTONS (sizeof(buttons)/sizeof(PushButton))
