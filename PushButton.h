@@ -7,7 +7,7 @@
 #define PUSH_BUTTON_REPEAT_INTERVAL       200
 
 typedef enum {
-  noPress,
+  none,
   firstPress,
   repeatedPress,
   release
@@ -18,21 +18,20 @@ class PushButton {
   private:
 
     static int numButtons;
-    static PushButton *buttonState[PUSH_BUTTON_MAX_BUTTON_COUNT];
-    static void pciSetup(byte pin);
-
-  public:
-
-    static void checkAll();
+    static PushButton *buttons[PUSH_BUTTON_MAX_BUTTON_COUNT];
 
     byte pin;
     bool state;
-    unsigned long changeTime;
+    unsigned long nextEvalTime;
     ButtonPressType lastMessage;
+
+  public:
+
+    static void loop();
+    static char* buttonPressTypeToString(ButtonPressType msg);
 
     PushButton(byte pin);
 
-    void check();
     ButtonPressType read();
 };
 
